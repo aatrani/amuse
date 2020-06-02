@@ -1,4 +1,24 @@
 #include "worker_code.h"
+#include "tsunami4py.h"
+
+using std::cout;
+using std::endl;
+
+Tsunami *tsunami4py = nullptr;
+bool initialized = false;
+
+
+
+int initialize_code(){
+    tsunami4py = new Tsunami();
+    return 0;
+}
+
+int cleanup_code(){
+    delete tsunami4py;
+
+    return 0;
+}
 
 int get_mass(int index_of_the_particle, double * mass){
   return 0;
@@ -86,7 +106,9 @@ int recommit_particles(){
 }
 
 int echo_int(int int_in, int * int_out){
-  return 0;
+    cout << int_in;
+
+    return 0;
 }
 
 int get_kinetic_energy(double * kinetic_energy){
@@ -122,15 +144,7 @@ int set_radius(int index_of_the_particle, double radius){
   return 0;
 }
 
-int cleanup_code(){
-  return 0;
-}
-
 int recommit_parameters(){
-  return 0;
-}
-
-int initialize_code(){
   return 0;
 }
 

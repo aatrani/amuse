@@ -6,14 +6,27 @@ AMUSE_DIR?=$(shell amusifier --get-amuse-dir)
 MPICXX   ?= mpicxx
 
 CFLAGS   += -Wall -g
-CXXFLAGS += $(CFLAGS) 
+#CXXFLAGS += $(CFLAGS)
 LDFLAGS  += -lm $(MUSE_LD_FLAGS)
 
 OBJS = interface.o
 
 CODELIB = src/libtsunami.a
 
-all: tsunami_worker 
+TSUNAMI_SRC_DIR = $(AMUSE_DIR)/src/amuse/community/tsunami/tsunamisrc
+TSUNAMI_INCLUDES = -I$(TSUNAMI_SRC_DIR)/lib/utils/ -I$(TSUNAMI_SRC_DIR)/lib/ARchain/
+
+BUILDDIR = $(TSUNAMI_SRC_DIR)/build/
+CMAKE_DEPS = $(TSUNAMI_SRC_DIR)/CMakeLists.txt
+CMAKE_GENERATOR ?= Unix Makefiles
+
+CXXFLAGS += $(TSUNAMI_INCLUDES)
+
+all: $(BUILDDIR)/Makefile tsunami_worker
+
+$(BUILDDIR)/Makefile: $(CMAKE_DEPS)
+	cd $(BUILDDIR) && cmake $(TSUNAMI_SRC_DIR) -Damuse=on  -DCMAKE_CXX_COMPILER="$(CXX)"  -DCMAKE_CXX_FLAGS="$(CXXFLAGS)" -DCMAKE_BUILD_TYPE=Amuse -G "$(CMAKE_GENERATOR)"
+	cd $(BUILDDIR) && make
 
 clean:
 	$(RM) -rf __pycache__
@@ -37,4 +50,4 @@ tsunami_worker: worker_code.cc worker_code.h $(CODELIB) $(OBJS)
 	$(MPICXX) $(CXXFLAGS) $< $(OBJS) $(CODELIB) -o $@
 
 .cc.o: $<
-	$(CXX) $(CXXFLAGS) -c -o $@ $< 
+	$(CXX) $(CXXFLAGS) -c -o $@ $<

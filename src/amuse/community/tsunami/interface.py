@@ -1,12 +1,13 @@
-from amuse.rfi.core import legacy_function, LegacyFunctionSpecification
+from amuse.rfi.core import legacy_function, LegacyFunctionSpecification, CodeInterface
 from amuse.community.interface.gd import GravitationalDynamicsInterface, GravitationalDynamics
 
-class TsunamiInterface(GravitationalDynamicsInterface):
+class TsunamiInterface(CodeInterface,
+                       GravitationalDynamicsInterface):
     
     include_headers = ['worker_code.h']
     
     def __init__(self, **keyword_arguments):
-        GravitationalDynamicsInterface.__init__(self, name_of_the_worker="tsunami_worker", **keyword_arguments)
+        CodeInterface.__init__(self, name_of_the_worker="tsunami_worker", **keyword_arguments)
     
     @legacy_function
     def echo_int():

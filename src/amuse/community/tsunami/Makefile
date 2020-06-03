@@ -16,19 +16,23 @@ CODELIB = src/libtsunami.a
 TSUNAMI_SRC_DIR = $(AMUSE_DIR)/src/amuse/community/tsunami/tsunamisrc
 TSUNAMI_INCLUDES = -I$(TSUNAMI_SRC_DIR)/lib/utils/ -I$(TSUNAMI_SRC_DIR)/lib/ARchain/
 
-BUILDDIR = $(TSUNAMI_SRC_DIR)/build/
+TSUNAMI_BUILDDIR = $(TSUNAMI_SRC_DIR)/build
+TSUNAMI_LD = $(TSUNAMI_BUILDDIR)/lib/libbase.a
+
+
 CMAKE_DEPS = $(TSUNAMI_SRC_DIR)/CMakeLists.txt
 CMAKE_GENERATOR ?= Unix Makefiles
 
 CXXFLAGS += $(TSUNAMI_INCLUDES)
 
-all: $(BUILDDIR)/Makefile tsunami_worker
+all: $(TSUNAMI_BUILDDIR)/Makefile tsunami_worker
 
-$(BUILDDIR)/Makefile: $(CMAKE_DEPS)
-	cd $(BUILDDIR) && cmake $(TSUNAMI_SRC_DIR) -Damuse=on  -DCMAKE_CXX_COMPILER="$(CXX)"  -DCMAKE_CXX_FLAGS="$(CXXFLAGS)" -DCMAKE_BUILD_TYPE=Amuse -G "$(CMAKE_GENERATOR)"
-	cd $(BUILDDIR) && make
+$(TSUNAMI_BUILDDIR)/Makefile: $(CMAKE_DEPS)
+	cd $(TSUNAMI_BUILDDIR) && cmake $(TSUNAMI_SRC_DIR) -Damuse=on  -DCMAKE_CXX_COMPILER="$(CXX)"  -DCMAKE_CXX_FLAGS="$(CXXFLAGS)" -DCMAKE_BUILD_TYPE=Amuse -G "$(CMAKE_GENERATOR)"
+	cd $(TSUNAMI_BUILDDIR) && make
 
 clean:
+	$(RM) -r $(TSUNAMI_BUILDDIR)/*
 	$(RM) -rf __pycache__
 	$(RM) -f *.so *.o *.pyc worker_code.cc worker_code.h 
 	$(RM) *~ tsunami_worker worker_code.cc
@@ -47,7 +51,7 @@ worker_code.h: interface.py
 	$(CODE_GENERATOR) --type=H interface.py TsunamiInterface -o $@
 
 tsunami_worker: worker_code.cc worker_code.h $(CODELIB) $(OBJS)
-	$(MPICXX) $(CXXFLAGS) $< $(OBJS) $(CODELIB) -o $@
+	$(MPICXX) $(CXXFLAGS) $< $(OBJS) $(TSUNAMI_LD) $(CODELIB) -o $@
 
 .cc.o: $<
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

@@ -23,6 +23,19 @@ code.particles.remove_particles(particles[2:4])
 
 print(code.particles)
 
+otherparticles = new_plummer_model(2)
+otherparticles2 = new_plummer_model(3)
+
+code.particles.add_particles(otherparticles)
+code.particles.add_particles(otherparticles2)
+
+print(code.particles)
+
+code.particles.remove_particle(otherparticles2[0])
+
+print(code.particles)
+
+
 del code
 
 

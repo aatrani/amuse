@@ -12,14 +12,18 @@ from amuse.ic import plummer
 from amuse.ic.plummer import new_plummer_model
 
 
-code = Tsunami()
+code = Tsunami(redirection="none")
 
 particles = new_plummer_model(5)
 code.particles.add_particles(particles)
 print(particles)
+
+code.particles.remove_particle(particles[0])
+
+
 print(code.particles)
 
-code.particles.remove_particles(particles[2:4])
+code.particles.remove_particles(particles[1:3])
 
 print(code.particles)
 
@@ -35,8 +39,16 @@ code.particles.remove_particle(otherparticles2[0])
 
 print(code.particles)
 
+code.evolve_model(1 | nbody_system.time)
 
-del code
+print(code.particles)
+
+code.particles.add_particle(otherparticles2[0])
+
+code.evolve_model(1 | nbody_system.time)
+
+code.stop()
+
 
 
 

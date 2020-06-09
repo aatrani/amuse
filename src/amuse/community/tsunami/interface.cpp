@@ -8,7 +8,7 @@ using std::cout;
 using std::endl;
 
 Tsunami *tsunami4py = nullptr;
-bool initialized = false;
+bool are_arrays_allocated = false;
 bool is_interface_uptodate = false;
 
 size_t tmp_Npart = 0;
@@ -22,7 +22,7 @@ std::vector<ch_real3> tmp_pos;
 std::vector<ch_real3> tmp_vel;
 
 int sync_from_internals_to_interface() {
-    if(initialized and not is_interface_uptodate) {
+    if(are_arrays_allocated and not is_interface_uptodate) {
         //From code into std::vectors
         memcpy(&tmp_mass[0], &tsunami4py->mass[0], sizeof(ch_real)*tsunami4py->Npart);
         memcpy(&tmp_rad[0], &tsunami4py->rad[0], sizeof(ch_real)*tsunami4py->Npart);
@@ -35,7 +35,7 @@ int sync_from_internals_to_interface() {
 }
 
 int sync_from_interface_to_internals() {
-    assert(initialized);
+    assert(are_arrays_allocated);
 
     for(size_t i = 0; i < tmp_Npart; i++) {
         tsunami4py->pos[i].x = tmp_pos[i].x;
@@ -54,18 +54,23 @@ int sync_from_interface_to_internals() {
 }
 
 int initialize_code() {
+    cout << "initialize_code" << endl;
+
     tsunami4py = new Tsunami();
     return 0;
 }
 
 int cleanup_code() {
+    cout << "cleanup_code" << endl;
+
     delete tsunami4py;
-    initialized = false;
+    are_arrays_allocated = false;
     return 0;
 }
 
 int new_particle(int * index_of_the_particle, double mass, double x,
                  double y, double z, double vx, double vy, double vz, double radius){
+    cout << "new_particle" << endl;
 
     sync_from_internals_to_interface();
 
@@ -86,6 +91,7 @@ int new_particle(int * index_of_the_particle, double mass, double x,
 }
 
 int delete_particle(int index_of_the_particle){
+    cout << "delete_particle" << endl;
 
     // Need to sync so when recomming particles, we can simply update
     sync_from_internals_to_interface();
@@ -109,10 +115,11 @@ int delete_particle(int index_of_the_particle){
 }
 
 int commit_particles(){
+    cout << "commit_particles" << endl;
 
     tsunami4py->Npart = tmp_Npart;
     tsunami4py->allocate_arrays();
-    initialized = true;
+    are_arrays_allocated = true;
 
     sync_from_interface_to_internals();
 
@@ -124,6 +131,7 @@ int commit_particles(){
 }
 
 int recommit_particles() {
+    cout << "recommit_particles" << endl;
     // We are here because something changed.
     bool reallocate = tmp_Npart != tsunami4py->Npart;
     if (reallocate) {
@@ -143,30 +151,39 @@ int recommit_particles() {
     return 0;
 }
 
-int evolve_model(double time){
+int evolve_model(double time) {
+    cout << "evolve_model" << endl;
+
     return 0;
 }
 
-int synchronize_model(){
+int synchronize_model() {
+    cout << "synchronize_model" << endl;
+
     return 0;
 }
 
-int commit_parameters(){
+int commit_parameters() {
+    cout << "commit_parameters" << endl;
+
     return 0;
 }
 
-int recommit_parameters(){
+int recommit_parameters() {
+    cout << "recommit_parameters" << endl;
+
     return 0;
 }
 
 int set_mass(int index_of_the_particle, double mass) {
+    cout << "set_mass" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
         return -1;
     }
 
-    if(not initialized) {
+    if(not are_arrays_allocated) {
         tmp_mass[ind] = mass;
     } else {
         tsunami4py->mass[ind] = mass;
@@ -177,13 +194,14 @@ int set_mass(int index_of_the_particle, double mass) {
 }
 
 int get_mass(int index_of_the_particle, double * mass) {
+    cout << "get_mass" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
         return -1;
     }
 
-    if(not initialized) {
+    if(not are_arrays_allocated) {
         *mass = tmp_mass[ind];
     } else {
         *mass = tsunami4py->mass[ind];
@@ -194,6 +212,7 @@ int get_mass(int index_of_the_particle, double * mass) {
 }
 
 int set_radius(int index_of_the_particle, double radius) {
+    cout << "set_radius" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
@@ -201,7 +220,7 @@ int set_radius(int index_of_the_particle, double radius) {
     }
 
 
-    if(not initialized) {
+    if(not are_arrays_allocated) {
         tmp_rad[ind] = radius;
     } else {
         tsunami4py->rad[ind] = radius;
@@ -212,6 +231,7 @@ int set_radius(int index_of_the_particle, double radius) {
 }
 
 int get_radius(int index_of_the_particle, double * radius){
+    cout << "get_radius" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
@@ -219,7 +239,7 @@ int get_radius(int index_of_the_particle, double * radius){
     }
 
     //sync_from_internals_to_interface();
-    if(not initialized) {
+    if(not are_arrays_allocated) {
         *radius = tmp_rad[ind];
     } else {
         *radius = tsunami4py->rad[ind];
@@ -229,6 +249,7 @@ int get_radius(int index_of_the_particle, double * radius){
 }
 
 int set_position(int index_of_the_particle, double x, double y, double z) {
+    cout << "set_position" << endl;
 
     // Maybe no need
     //sync_from_internals_to_interface();
@@ -237,7 +258,7 @@ int set_position(int index_of_the_particle, double x, double y, double z) {
     if (ind >= tmp_Npart) {
         return -1;
     }
-    if(not initialized) {
+    if(not are_arrays_allocated) {
         tmp_pos[ind].x = x;
         tmp_pos[ind].y = y;
         tmp_pos[ind].z = z;
@@ -252,13 +273,14 @@ int set_position(int index_of_the_particle, double x, double y, double z) {
 }
 
 int get_position(int index_of_the_particle, double * x, double * y, double * z) {
+    cout << "get_position" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
         return -1;
     }
 
-    if(not initialized) {
+    if(not are_arrays_allocated) {
         *x = tmp_pos[ind].x;
         *y = tmp_pos[ind].y;
         *z = tmp_pos[ind].z;
@@ -272,13 +294,14 @@ int get_position(int index_of_the_particle, double * x, double * y, double * z) 
 }
 
 int set_velocity(int index_of_the_particle, double vx, double vy, double vz) {
+    cout << "set_velocity" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
         return -1;
     }
 
-    if(not initialized) {
+    if(not are_arrays_allocated) {
         tmp_vel[ind].x = vx;
         tmp_vel[ind].y = vy;
         tmp_vel[ind].z = vz;
@@ -295,13 +318,14 @@ int set_velocity(int index_of_the_particle, double vx, double vy, double vz) {
 }
 
 int get_velocity(int index_of_the_particle, double * vx, double * vy, double * vz) {
+    cout << "get_velocity" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
         return -1;
     }
 
-    if(not initialized) {
+    if(not are_arrays_allocated) {
         *vx = tmp_vel[ind].x;
         *vy = tmp_vel[ind].y;
         *vz = tmp_vel[ind].z;
@@ -317,11 +341,13 @@ int get_velocity(int index_of_the_particle, double * vx, double * vy, double * v
 
 int set_state(int index_of_the_particle, double mass, double x, double y,
               double z, double vx, double vy, double vz, double radius) {
+    cout << "set_state" << endl;
+
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
         return -1;
     }
-    if (not initialized) {
+    if (not are_arrays_allocated) {
         tmp_mass[ind] = mass;
         tmp_rad[ind] = radius;
 
@@ -353,6 +379,8 @@ int set_state(int index_of_the_particle, double mass, double x, double y,
 int get_state(int index_of_the_particle, double * mass, double * x,
               double * y, double * z, double * vx, double * vy, double * vz,
               double * radius) {
+    cout << "get_state" << endl;
+
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) {
         return -1;
@@ -406,7 +434,7 @@ int get_acceleration(int index_of_the_particle, double * ax, double * ay,
 }
 
 int get_number_of_particles(int * number_of_particles){
-    if (initialized)
+    if (are_arrays_allocated)
         *number_of_particles = tsunami4py->Npart;
     else
         *number_of_particles = tmp_Npart;
@@ -440,7 +468,7 @@ int get_total_radius(double * radius){
 
 int get_total_mass(double * mass){
     double mtot = 0;
-    if (initialized) {
+    if (are_arrays_allocated) {
         for (size_t i=0; i<tmp_Npart; i++)
             mtot += tsunami4py->mass[i];
     } else {

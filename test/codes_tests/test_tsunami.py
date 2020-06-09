@@ -19,11 +19,16 @@ code.particles.add_particles(particles)
 print(particles)
 
 code.particles.remove_particle(particles[0])
+code.particles[2].velocity = (1,  1, 1) | nbody_system.length / nbody_system.time
 
+
+code.particles[1].mass = 1 | nbody_system.mass
 
 print(code.particles)
 
 code.particles.remove_particles(particles[1:3])
+
+print(code.particles[0].position)
 
 print(code.particles)
 
@@ -41,11 +46,21 @@ print(code.particles)
 
 code.evolve_model(1 | nbody_system.time)
 
+code.evolve_model(1 | nbody_system.time)
+
+
 print(code.particles)
+
+code.particles[1].position = (1,  1, 1) | nbody_system.length
+
+code.particles[2].velocity = (1,  1, 1) | nbody_system.length / nbody_system.time
 
 code.particles.add_particle(otherparticles2[0])
 
 code.evolve_model(1 | nbody_system.time)
+
+print(code.particles.position[0])
+print(code.particles)
 
 code.stop()
 

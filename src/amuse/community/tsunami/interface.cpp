@@ -155,13 +155,7 @@ int recommit_particles() {
 int evolve_model(double time) {
     cout << "evolve_model" << endl;
 
-    is_interface_uptodate = false;
-
-    for(size_t i=0; i<tsunami4py->Npart; i++) {
-        tsunami4py->pos[i] = ch_real3(0.0);
-        tsunami4py->rad[i] = 666;
-    }
-
+    tsunami4py->evolve_system(time);
 
     return 0;
 }

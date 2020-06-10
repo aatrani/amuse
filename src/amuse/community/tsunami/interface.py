@@ -8,15 +8,6 @@ class TsunamiInterface(CodeInterface,
     
     def __init__(self, **keyword_arguments):
         CodeInterface.__init__(self, name_of_the_worker="tsunami_worker", **keyword_arguments)
-    
-    @legacy_function
-    def echo_int():
-        function = LegacyFunctionSpecification()  
-        function.addParameter('int_in', dtype='int32', direction=function.IN)
-        function.addParameter('int_out', dtype='int32', direction=function.OUT)
-        function.result_type = 'int32'
-        function.can_handle_array = True
-        return function
         
     
 class Tsunami(GravitationalDynamics):
@@ -24,3 +15,5 @@ class Tsunami(GravitationalDynamics):
     def __init__(self, **options):
         GravitationalDynamics.__init__(self,  TsunamiInterface(**options), **options)
     
+    def define_errorcodes(self, handler):
+        handler.add_errorcode(-2, 'Called function is not implemented.')

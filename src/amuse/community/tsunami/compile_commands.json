@@ -1,0 +1,198 @@
+[
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami",
+  "arguments": [
+   "g++",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-c",
+   "-o",
+   "interface.o",
+   "interface.cpp"
+  ],
+  "file": "interface.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/base.dir/src/ARchain/chain.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/chain.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/chain.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/base.dir/src/ARchain/Nbodyalgorithms.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/Nbodyalgorithms.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/Nbodyalgorithms.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/base.dir/src/ARchain/IO.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/IO.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/IO.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/base.dir/src/ARchain/bulirsch.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/bulirsch.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/bulirsch.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/base.dir/src/ARchain/leapfrog_stepped.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/leapfrog_stepped.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/leapfrog_stepped.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/base.dir/src/ARchain/classification.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/classification.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/classification.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/base.dir/src/ARchain/keplfunc.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/keplfunc.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/keplfunc.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/tsunami.x.dir/src/ARchain/tsunami4py.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/tsunami4py.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/src/ARchain/tsunami4py.cpp"
+ },
+ {
+  "directory": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/build",
+  "arguments": [
+   "/usr/bin/g++",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib",
+   "-g",
+   "-O2",
+   "-fPIC",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/utils/",
+   "-I/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/lib/ARchain/",
+   "-DTIMINGU",
+   "-DPYTHON",
+   "-std=gnu++11",
+   "-o",
+   "CMakeFiles/tsunami.x.dir/tests/archain/tsunami.cpp.o",
+   "-c",
+   "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/tests/archain/tsunami.cpp"
+  ],
+  "file": "/home/lex/amuse/src/amuse/community/tsunami/tsunamisrc/tests/archain/tsunami.cpp"
+ }
+]

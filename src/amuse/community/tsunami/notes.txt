@@ -1,0 +1,2 @@
+- commit particles (the first time) or recommit particle (all subsequent times) is called before any set or get.
+  It is not called before new_particle and delete_particle

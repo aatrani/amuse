@@ -21,6 +21,7 @@ std::vector<ch_real> tmp_rad;
 std::vector<ch_real3> tmp_pos;
 std::vector<ch_real3> tmp_vel;
 std::vector<ch_real> tmp_soft;
+std::vector<ptype> tmp_ptype;
 
 int sync_from_internals_to_interface() {
     if(are_arrays_allocated and not is_interface_uptodate) {
@@ -329,48 +330,21 @@ int get_state(int index_of_the_particle, double * mass, double * x,
 }
 
 
-int set_begin_time(double time){
+int set_begin_time(double time) {
+    tsunami4py->begin_time = time;
+
     return 0;
 }
 
 int get_begin_time(double * time){
-    return 0;
-}
+    *time = tsunami4py->begin_time;
 
-int set_eps2(double epsilon_squared){
-  return 0;
-}
-
-int get_eps2(double * epsilon_squared){
-  return 0;
-}
-
-int get_potential(int index_of_the_particle, double * potential){
-  return 0;
-}
-
-int set_acceleration(int index_of_the_particle, double ax, double ay,
-                     double az){
-    return 0;
-}
-
-int get_acceleration(int index_of_the_particle, double * ax, double * ay,
-                     double * az){
     return 0;
 }
 
 int get_number_of_particles(int * number_of_particles){
     *number_of_particles = tmp_Npart;
 
-    return 0;
-}
-
-int get_index_of_first_particle(int * index_of_the_particle){
-    return 0;
-}
-
-int get_index_of_next_particle(int index_of_the_particle,
-                               int * index_of_the_next_particle){
     return 0;
 }
 
@@ -382,10 +356,6 @@ int get_time_step(double * time_step) {
 
 int get_time(double * time) {
     *time = tsunami4py->ctime;
-    return 0;
-}
-
-int get_total_radius(double * radius){
     return 0;
 }
 
@@ -406,12 +376,18 @@ int get_kinetic_energy(double * kinetic_energy) {
 }
 
 int get_center_of_mass_position(double * x, double * y, double * z){
-    // Zero atm
+    *x = 0.0;
+    *y = 0.0;
+    *z = 0.0;
+
     return 0;
 }
 
 int get_center_of_mass_velocity(double * vx, double * vy, double * vz){
-    // Zero atm
+    *vx = 0.0;
+    *vy = 0.0;
+    *vz = 0.0;
+
     return 0;
 }
 
@@ -421,9 +397,47 @@ int get_potential_energy(double * potential_energy) {
     return 0;
 }
 
+///////////////////////////////
+///     NOT IMPLEMENTED     ///
+///////////////////////////////
 
-int echo_int(int int_in, int * int_out){
-    cout << int_in;
-    *int_out = int_in;
-    return 0;
+int set_eps2(double epsilon_squared) {
+    std::cerr << "NOT IMPLEMENTED: " << __func__ << endl << __FILE__ << ":" << __LINE__ << endl;
+    return -2;
+}
+
+int get_eps2(double * epsilon_squared) {
+    std::cerr << "NOT IMPLEMENTED: " << __func__ << endl << __FILE__ << ":" << __LINE__ << endl;
+    return -2;
+}
+
+int get_potential(int index_of_the_particle, double * potential) {
+    std::cerr << "NOT IMPLEMENTED: " << __func__ << endl << __FILE__ << ":" << __LINE__ << endl;
+    return -2;
+}
+
+int set_acceleration(int index_of_the_particle, double ax, double ay, double az) {
+    std::cerr << "NOT IMPLEMENTED: " << __func__ << endl << __FILE__ << ":" << __LINE__ << endl;
+    return -2;
+}
+
+int get_acceleration(int index_of_the_particle, double * ax, double * ay, double * az) {
+    std::cerr << "NOT IMPLEMENTED: " << __func__ << endl << __FILE__ << ":" << __LINE__ << endl;
+    return -2;
+}
+
+int get_index_of_first_particle(int * index_of_the_particle){
+    std::cerr << "NOT IMPLEMENTED: " << __func__ << endl << __FILE__ << ":" << __LINE__ << endl;
+    return -2;
+}
+
+int get_index_of_next_particle(int index_of_the_particle,
+                               int * index_of_the_next_particle){
+    std::cerr << "NOT IMPLEMENTED: " << __func__ << endl << __FILE__ << ":" << __LINE__ << endl;
+    return -2;
+}
+
+int get_total_radius(double * radius) {
+    std::cerr << "NOT IMPLEMENTED: " << __func__ << endl << __FILE__ << ":" << __LINE__ << endl;
+    return -2;
 }

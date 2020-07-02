@@ -18,13 +18,36 @@ TSUNAMI_INCLUDES = -I$(TSUNAMI_SRC_DIR)/lib/utils/ -I$(TSUNAMI_SRC_DIR)/lib/ARch
 TSUNAMI_BUILDDIR = $(TSUNAMI_SRC_DIR)/build
 TSUNAMI_LIB = $(TSUNAMI_BUILDDIR)/lib/libbase.a
 
-
 CMAKE_DEPS = $(TSUNAMI_SRC_DIR)/CMakeLists.txt
 CMAKE_GENERATOR ?= Unix Makefiles
 
 CXXFLAGS += $(TSUNAMI_INCLUDES)
 
-all: tsunami_worker
+all: $(TSUNAMI_SRC_DIR) tsunami_worker
+
+ifdef DOWNLOAD_CODES
+$(TSUNAMI_SRC_DIR):
+	make -C . download_git
+else
+$(TSUNAMI_SRC_DIR):
+	@echo ""
+	@echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	@echo ""
+	@echo "DOWNLOAD_CODES is not set. TSUNAMI will not be downloaded and build."
+	@echo "If you do want TSUNAMI, set DOWNLOAD_CODES to 1."
+	@echo "bash> export DOWNLOAD_CODES=1"
+	@echo "csh> setenv DOWNLOAD_CODES 1"
+	@echo ""
+	@echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	@echo ""
+	@make -s --no-print-directory -C . raise_error
+endif
+
+download_git:
+	git clone --branch AMUSE https://gitlab.com/mario.spera/tsunami.git $(TSUNAMI_SRC_DIR)
+
+download_git_ssh:
+	git clone --branch AMUSE git@gitlab.com:mario.spera/tsunami.git $(TSUNAMI_SRC_DIR)
 
 clean:
 	$(RM) -rf __pycache__

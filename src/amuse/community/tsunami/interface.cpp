@@ -169,12 +169,16 @@ int synchronize_model() {
 
 int commit_parameters() {
     cout << "commit_parameters" << endl;
+    if(are_arrays_allocated)
+        tsunami4py->reset_parameters();
 
     return 0;
 }
 
 int recommit_parameters() {
     cout << "recommit_parameters" << endl;
+    if(are_arrays_allocated)
+        tsunami4py->reset_parameters();
 
     return 0;
 }
@@ -396,6 +400,21 @@ int get_potential_energy(double * potential_energy) {
 
     return 0;
 }
+
+///////////////////////////////
+///       PARAMETERS        ///
+///////////////////////////////
+
+int get_tolerance(double * tolerance) {
+    *tolerance = tsunami4py->tolerance;
+    return 0;
+}
+
+int set_tolerance(double tolerance) {
+    tsunami4py->tolerance = tolerance;
+    return 0;
+}
+
 
 ///////////////////////////////
 ///     NOT IMPLEMENTED     ///

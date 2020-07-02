@@ -22,17 +22,23 @@ pythagorean.velocity = [[0., 0., 0.], [0., 0., 0.], [0., 0., 0.]] | nbody_system
 pythagorean.radius = [0., 0., 0.] | nbody_system.length
 
 print(pythagorean)
-
 code.particles.add_particles(pythagorean)
+#print(code.parameters)
+code.parameters.tolerance = 1e-12
+#print(code.parameters)
 
 code_to_pythagorean = code.particles.new_channel_to(pythagorean)
 
 print(code.particles)
 
+print(code.parameters)
+code.parameters.tolerance = 1e-10
+print(code.parameters)
+
 totp = []
 totp.append(pythagorean.position.value_in(nbody_system.length))
 
-dt = 0.1 | nbody_system.time
+dt = 70 | nbody_system.time
 ft = 70 | nbody_system.time
 realt = 0 | nbody_system.time
 onetime = True

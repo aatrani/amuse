@@ -415,6 +415,57 @@ int set_tolerance(double tolerance) {
     return 0;
 }
 
+int get_usePNs(int * usePNs) {
+    *usePNs = tsunami4py->wPNs;
+    return 0;
+}
+
+int set_usePNs(int usePNs) {
+    tsunami4py->wPNs = usePNs;
+    return 0;
+}
+
+int get_useTides(int * useTides) {
+    *useTides = tsunami4py->wTides;
+    return 0;
+}
+
+int set_useTides(int useTides) {
+    tsunami4py->wTides = useTides;
+    return 0;
+}
+
+int get_alpha(double * alpha) {
+    *alpha = tsunami4py->abc.x;
+    return 0;
+}
+
+int set_alpha(double alpha) {
+    tsunami4py->abc.x = alpha;
+    return 0;
+}
+
+int get_beta(double * beta) {
+    *beta = tsunami4py->abc.y;
+    return 0;
+}
+
+int set_beta(double beta) {
+    tsunami4py->abc.y = beta;
+    return 0;
+}
+
+int get_gamma(double * gamma) {
+    *gamma = tsunami4py->abc.z;
+    return 0;
+}
+
+int set_gamma(double gamma) {
+    tsunami4py->abc.z = gamma;
+    return 0;
+}
+
+
 
 ///////////////////////////////
 ///     NOT IMPLEMENTED     ///

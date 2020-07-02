@@ -36,11 +36,12 @@ code.parameters.tolerance = 1e-13
 code.parameters.usePNs = False
 code.parameters.begin_time = 5 | nbody_system.time
 
-code.parameters.alpha = 1.0
-#code.parameters.beta = 1.0
+#code.parameters.alpha = 0.0
+#code.parameters.beta = 0.0
 #code.parameters.gamma = 1.0
 
 print(code.parameters)
+code.cleanup_code
 
 totp = []
 totp.append(pythagorean.position.value_in(nbody_system.length))
@@ -54,6 +55,8 @@ while (realt < ft):
 
     code.evolve_model(realt)
     code_to_pythagorean.copy()
+
+    print(code.get_time(), code.get_deltaE())
 
     totp.append(pythagorean.position.value_in(nbody_system.length))
 

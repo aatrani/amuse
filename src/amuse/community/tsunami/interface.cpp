@@ -401,6 +401,12 @@ int get_potential_energy(double * potential_energy) {
     return 0;
 }
 
+int get_deltaE(double * deltaE) {
+    *deltaE = tsunami4py->deltaE;
+    return 0;
+}
+
+
 ///////////////////////////////
 ///       PARAMETERS        ///
 ///////////////////////////////
@@ -464,7 +470,6 @@ int set_gamma(double gamma) {
     tsunami4py->abc.z = gamma;
     return 0;
 }
-
 
 
 ///////////////////////////////

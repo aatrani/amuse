@@ -147,6 +147,24 @@ class TsunamiInterface(CodeInterface,
         return function
 
     @legacy_function
+    def get_deltaE():
+        """
+        Get energy error.
+        """
+        function = LegacyFunctionSpecification()
+        function.addParameter('deltaE', dtype='float64', direction=function.OUT,
+                              description="Energy error")
+        function.result_type = 'int32'
+        function.result_doc = """
+        0 - OK
+            the parameter was retrieved
+        -1 - ERROR
+            could not retrieve parameter
+        """
+        return function
+
+
+    @legacy_function
     def set_usePNs():
         """ set_usePNs([0,1]): use post-Newtonians if 1
           if set to 0, post-Newtonians are not used"""
@@ -246,4 +264,19 @@ class Tsunami(GravitationalDynamics):
             "Tides flag. True means: tidal forces are included. "
             "False means: no tidal forces are included",
             False
+        )
+
+    def define_methods(self, handler):
+        GravitationalDynamics.define_methods(self, handler)
+
+        handler.add_method(
+            "get_time",
+            (),
+            (nbody_system.time, handler.ERROR_CODE,)
+        )
+
+        handler.add_method(
+            "get_deltaE",
+            (),
+            (handler.NO_UNIT, handler.ERROR_CODE,)
         )

@@ -87,21 +87,21 @@ def new_option_parser():
     result = OptionParser()
     result.add_option(
         "--petar-version",
-        default='67fd6ac0441a9c2a82e17312f8e62a4bed1f9b37',
+        default='db58eb4966e8ee2819e6506286bffbd6d5289999',
         dest="petar_version",
         help="PeTar commit hash to download",
         type="string"
     )
     result.add_option(
         "--sdar-version",
-        default='2b674b8be42b80cd65135fee29d9cac3ae375b49',
+        default='f251eba1332c8ae1460c3cdb60b718890e52f44d',
         dest="sdar_version",
         help="SDAR commit hash to download",
         type="string"
     )
     result.add_option(
         "--fdps-version",
-        default='8e5c9ba0da993f7eca6b0fbe2b7a48adf7438ed9',
+        default='3370a770cb444eab106c81a6ebbc4cb9ef5226d6',
         dest="fdps_version",
         help="FDPS commit hash to download",
         type="string"

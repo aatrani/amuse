@@ -399,68 +399,106 @@ class Tsunami(GravitationalDynamics):
             (handler.NO_UNIT, handler.ERROR_CODE,)
         )
 
+        ### defined already as add_boolean_parameter
         # handler.add_method(
-        #     "set_timelag",
-        #     (
-        #         handler.NO_UNIT,
-        #         nbody_system.time,
-        #     ),
-        #     (
-        #         handler.ERROR_CODE
-        #     )
+        #     "get_tolerance",
+        #     (),
+        #     (handler.NO_UNIT, handler.ERROR_CODE,)
         # )
         # handler.add_method(
-        #     "get_timelag",
-        #     (
-        #         handler.NO_UNIT,
-        #     ),
-        #     (
-        #         nbody_system.time,
-        #         handler.ERROR_CODE
-        #     )
+        #     "set_tolerance",
+        #     (handler.NO_UNIT, ),
+        #     (handler.ERROR_CODE,)
         # )
         #
         # handler.add_method(
-        #     "set_kaps",
-        #     (
-        #         handler.NO_UNIT,
-        #         handler.NO_UNIT,
-        #     ),
-        #     (
-        #         handler.ERROR_CODE
-        #     )
+        #     "get_alpha",
+        #     (),
+        #     (handler.NO_UNIT, handler.ERROR_CODE,)
         # )
         # handler.add_method(
-        #     "get_kaps",
-        #     (
-        #         handler.NO_UNIT,
-        #     ),
-        #     (
-        #         handler.NO_UNIT,
-        #         handler.ERROR_CODE
-        #     )
+        #     "set_alpha",
+        #     (handler.NO_UNIT, ),
+        #     (handler.ERROR_CODE,)
         # )
         #
         # handler.add_method(
-        #     "set_adiabatic_index",
-        #     (
-        #         handler.NO_UNIT,
-        #         handler.NO_UNIT,
-        #     ),
-        #     (
-        #         handler.ERROR_CODE
-        #     )
+        #     "get_beta",
+        #     (),
+        #     (handler.NO_UNIT, handler.ERROR_CODE,)
         # )
         # handler.add_method(
-        #     "get_adiabatic_index",
-        #     (
-        #         handler.NO_UNIT,
-        #     ),
-        #     (
-        #         handler.NO_UNIT,
-        #         handler.ERROR_CODE
-        #     )
+        #     "set_beta",
+        #     (handler.NO_UNIT, ),
+        #     (handler.ERROR_CODE,)
         # )
+        #
+        # handler.add_method(
+        #     "get_gamma",
+        #     (),
+        #     (handler.NO_UNIT, handler.ERROR_CODE,)
+        # )
+        # handler.add_method(
+        #     "set_gamma",
+        #     (handler.NO_UNIT, ),
+        #     (handler.ERROR_CODE,)
+        # )
+        #
+        # handler.add_method(
+        #     "set_usePNs",
+        #     (handler.NO_UNIT,),
+        #     ()
+        # )
+        # handler.add_method(
+        #     "get_usePNs",
+        #     (),
+        #     (handler.NO_UNIT,)
+        # )
+        #
+        # handler.add_method(
+        #     "set_useTides",
+        #     (handler.NO_UNIT,),
+        #     ()
+        # )
+        # handler.add_method(
+        #     "get_useTides",
+        #     (),
+        #     (handler.NO_UNIT,)
+        # )
+
+        handler.add_method(
+            "set_timelag",
+            (handler.NO_UNIT, nbody_system.time,),
+            (handler.ERROR_CODE,)
+        )
+        handler.add_method(
+            "get_timelag",
+            (handler.NO_UNIT,),
+            (nbody_system.time, handler.ERROR_CODE)
+        )
+
+        handler.add_method(
+            "set_kaps",
+            (handler.NO_UNIT, handler.NO_UNIT),
+            (handler.ERROR_CODE,)
+        )
+        handler.add_method(
+            "get_kaps",
+            (handler.NO_UNIT,),
+            (handler.NO_UNIT, handler.ERROR_CODE)
+        )
+
+        handler.add_method(
+            "set_adiabatic_index",
+            (handler.NO_UNIT, handler.NO_UNIT),
+            (handler.ERROR_CODE,)
+        )
+
+        handler.add_method(
+            "get_adiabatic_index",
+            (handler.NO_UNIT,),
+            (handler.NO_UNIT, handler.ERROR_CODE)
+        )
 
     def define_particle_sets(self, handler):
         GravitationalDynamics.define_particle_sets(self, handler)

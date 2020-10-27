@@ -199,122 +199,127 @@ class TsunamiInterface(CodeInterface,
         function.result_type = 'i'
         return function
 
-    @legacy_function
-    def get_timelag():
-        """
-        Retrieve the timelag of a particle.
-        """
-        function = LegacyFunctionSpecification()
-        function.addParameter('index_of_the_particle',
-                              dtype='int32',
-                              direction=function.IN,
-                              description = "Index of the particle to get the timelag of. This index must have been returned by an earlier call to :meth:`new_particle`")
-        function.addParameter('timelag',
-                              dtype='float64',
-                              unit=nbody_system.time,
-                              direction=function.OUT,
-                              description = "The timelag of the particle")
-        function.result_type = 'int32'
-        function.can_handle_array = True
 
-    @legacy_function
-    def set_timelag():
-        """
-        Set the timelag of a particle
-        """
-        function = LegacyFunctionSpecification()
-        function.addParameter('index_of_the_particle',
-                              dtype='int32',
-                              direction=function.IN,
-                              description = "Index of the particle to get the timelag of. This index must have been returned by an earlier call to :meth:`new_particle`")
-        function.addParameter('timelag',
-                              dtype='float64',
-                              direction=function.IN,
-                              unit=nbody_system.time,
-                              description = "The timelag of the particle")
-        function.result_type = 'int32'
-        function.can_handle_array = True
-        function.result_doc = """
-        0 - OK
-            particle was found in the model and the information was retreived
-        -1 - ERROR
-            particle could not be found
-        """
-        return function
+    #FIXME
+    # UNCOMMENTING THIS LEADS TO THE COMPILING ERROR
+    # I NEED THESE LEGACY FUNCTIONS TO ACCESS THE PARTICLE'S SET NEW ATTRIBUTES,
+    # timelag, kaps, adiabatic_index
+    # @legacy_function
+    # def get_timelag():
+    #     """
+    #     Retrieve the timelag of a particle.
+    #     """
+    #     function = LegacyFunctionSpecification()
+    #     function.addParameter('index_of_the_particle',
+    #                           dtype='int32',
+    #                           direction=function.IN,
+    #                           description = "Index of the particle to get the timelag of. This index must have been returned by an earlier call to :meth:`new_particle`")
+    #     function.addParameter('timelag',
+    #                           dtype='float64',
+    #                           unit=nbody_system.time,
+    #                           direction=function.OUT,
+    #                           description = "The timelag of the particle")
+    #     function.result_type = 'int32'
+    #     function.can_handle_array = True
 
-    @legacy_function
-    def get_kaps():
-        """
-        Retrieve the timelag of a particle.
-        """
-        function = LegacyFunctionSpecification()
-        function.addParameter('index_of_the_particle',
-                              dtype='int32',
-                              direction=function.IN,
-                              description = "Index of the particle to get the kaps of. This index must have been returned by an earlier call to :meth:`new_particle`")
-        function.addParameter('kaps',
-                              dtype='float64',
-                              unit=NO_UNIT,
-                              direction=function.OUT,
-                              description = "The apsidal constant of the particle")
-        function.result_type = 'int32'
-        function.can_handle_array = True
-
-    @legacy_function
-    def set_kaps():
-        """
-        Set the apsidal constant of a particle
-        """
-        function = LegacyFunctionSpecification()
-        function.addParameter('index_of_the_particle', dtype='int32', direction=function.IN,
-            description = "Index of the particle to get the apsidal constant of. This index must have been returned by an earlier call to :meth:`new_particle`")
-        function.addParameter('kaps', dtype='float64', direction=function.IN, unit=NO_UNIT, description = "The apsidal constant of the particle")
-        function.result_type = 'int32'
-        function.can_handle_array = True
-        function.result_doc = """
-        0 - OK
-            particle was found in the model and the information was retreived
-        -1 - ERROR
-            particle could not be found
-        """
-        return function
-
-    @legacy_function
-    def get_adiabatic_index():
-        """
-        Retrieve the adiabatic index constant of a particle.
-        """
-        function = LegacyFunctionSpecification()
-        function.addParameter('index_of_the_particle',
-                              dtype='int32',
-                              direction=function.IN,
-                              description = "Index of the particle to get the adiabatic index of. This index must have been returned by an earlier call to :meth:`new_particle`")
-        function.addParameter('adiabatic_index',
-                              dtype='float64',
-                              unit=NO_UNIT,
-                              direction=function.OUT,
-                              description = "The adiabatic index of the particle")
-        function.result_type = 'int32'
-        function.can_handle_array = True
-
-    @legacy_function
-    def set_adiabatic_index():
-        """
-        Set the adiabatic index of a particle
-        """
-        function = LegacyFunctionSpecification()
-        function.addParameter('index_of_the_particle', dtype='int32', direction=function.IN,
-            description = "Index of the particle to get the adiabatic index of. This index must have been returned by an earlier call to :meth:`new_particle`")
-        function.addParameter('adiabatic_index', dtype='float64', direction=function.IN, unit=NO_UNIT, description = "The adiabatic index of the particle")
-        function.result_type = 'int32'
-        function.can_handle_array = True
-        function.result_doc = """
-        0 - OK
-            particle was found in the model and the information was retreived
-        -1 - ERROR
-            particle could not be found
-        """
-        return function
+    # @legacy_function
+    # def set_timelag():
+    #     """
+    #     Set the timelag of a particle
+    #     """
+    #     function = LegacyFunctionSpecification()
+    #     function.addParameter('index_of_the_particle',
+    #                           dtype='int32',
+    #                           direction=function.IN,
+    #                           description = "Index of the particle to get the timelag of. This index must have been returned by an earlier call to :meth:`new_particle`")
+    #     function.addParameter('timelag',
+    #                           dtype='float64',
+    #                           direction=function.IN,
+    #                           unit=nbody_system.time,
+    #                           description = "The timelag of the particle")
+    #     function.result_type = 'int32'
+    #     function.can_handle_array = True
+    #     function.result_doc = """
+    #     0 - OK
+    #         particle was found in the model and the information was retreived
+    #     -1 - ERROR
+    #         particle could not be found
+    #     """
+    #     return function
+    #
+    # @legacy_function
+    # def get_kaps():
+    #     """
+    #     Retrieve the timelag of a particle.
+    #     """
+    #     function = LegacyFunctionSpecification()
+    #     function.addParameter('index_of_the_particle',
+    #                           dtype='int32',
+    #                           direction=function.IN,
+    #                           description = "Index of the particle to get the kaps of. This index must have been returned by an earlier call to :meth:`new_particle`")
+    #     function.addParameter('kaps',
+    #                           dtype='float64',
+    #                           unit=NO_UNIT,
+    #                           direction=function.OUT,
+    #                           description = "The apsidal constant of the particle")
+    #     function.result_type = 'int32'
+    #     function.can_handle_array = True
+    #
+    # @legacy_function
+    # def set_kaps():
+    #     """
+    #     Set the apsidal constant of a particle
+    #     """
+    #     function = LegacyFunctionSpecification()
+    #     function.addParameter('index_of_the_particle', dtype='int32', direction=function.IN,
+    #         description = "Index of the particle to get the apsidal constant of. This index must have been returned by an earlier call to :meth:`new_particle`")
+    #     function.addParameter('kaps', dtype='float64', direction=function.IN, unit=NO_UNIT, description = "The apsidal constant of the particle")
+    #     function.result_type = 'int32'
+    #     function.can_handle_array = True
+    #     function.result_doc = """
+    #     0 - OK
+    #         particle was found in the model and the information was retreived
+    #     -1 - ERROR
+    #         particle could not be found
+    #     """
+    #     return function
+    #
+    # @legacy_function
+    # def get_adiabatic_index():
+    #     """
+    #     Retrieve the adiabatic index constant of a particle.
+    #     """
+    #     function = LegacyFunctionSpecification()
+    #     function.addParameter('index_of_the_particle',
+    #                           dtype='int32',
+    #                           direction=function.IN,
+    #                           description = "Index of the particle to get the adiabatic index of. This index must have been returned by an earlier call to :meth:`new_particle`")
+    #     function.addParameter('adiabatic_index',
+    #                           dtype='float64',
+    #                           unit=NO_UNIT,
+    #                           direction=function.OUT,
+    #                           description = "The adiabatic index of the particle")
+    #     function.result_type = 'int32'
+    #     function.can_handle_array = True
+    #
+    # @legacy_function
+    # def set_adiabatic_index():
+    #     """
+    #     Set the adiabatic index of a particle
+    #     """
+    #     function = LegacyFunctionSpecification()
+    #     function.addParameter('index_of_the_particle', dtype='int32', direction=function.IN,
+    #         description = "Index of the particle to get the adiabatic index of. This index must have been returned by an earlier call to :meth:`new_particle`")
+    #     function.addParameter('adiabatic_index', dtype='float64', direction=function.IN, unit=NO_UNIT, description = "The adiabatic index of the particle")
+    #     function.result_type = 'int32'
+    #     function.can_handle_array = True
+    #     function.result_doc = """
+    #     0 - OK
+    #         particle was found in the model and the information was retreived
+    #     -1 - ERROR
+    #         particle could not be found
+    #     """
+    #     return function
 
 class Tsunami(GravitationalDynamics):
 

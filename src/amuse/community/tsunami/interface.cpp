@@ -57,14 +57,14 @@ int sync_from_interface_to_internals() {
 }
 
 int initialize_code() {
-    cout << "initialize_code" << endl;
+    //cout << "initialize_code" << endl;
 
     tsunami4py = new Tsunami();
     return 0;
 }
 
 int cleanup_code() {
-    cout << "cleanup_code" << endl;
+    //cout << "cleanup_code" << endl;
 
     delete tsunami4py;
     are_arrays_allocated = false;
@@ -73,7 +73,7 @@ int cleanup_code() {
 
 int new_particle(int * index_of_the_particle, double mass, double x,
                  double y, double z, double vx, double vy, double vz, double radius){
-    cout << "new_particle" << endl;
+    //cout << "new_particle" << endl;
 
     sync_from_internals_to_interface();
 
@@ -94,7 +94,7 @@ int new_particle(int * index_of_the_particle, double mass, double x,
 }
 
 int delete_particle(int index_of_the_particle){
-    cout << "delete_particle" << endl;
+    //cout << "delete_particle" << endl;
 
     // Need to sync so when recomming particles, we can simply update
     sync_from_internals_to_interface();
@@ -117,7 +117,7 @@ int delete_particle(int index_of_the_particle){
 }
 
 int commit_particles(){
-    cout << "commit_particles" << endl;
+    //cout << "commit_particles" << endl;
 
     tsunami4py->Npart = tmp_Npart;
     tsunami4py->allocate_arrays();
@@ -133,7 +133,7 @@ int commit_particles(){
 }
 
 int recommit_particles() {
-    cout << "recommit_particles" << endl;
+    //cout << "recommit_particles" << endl;
     // We are here because something changed.
     bool reallocate = tmp_Npart != tsunami4py->Npart;
     if (reallocate) {
@@ -154,7 +154,7 @@ int recommit_particles() {
 }
 
 int evolve_model(double time) {
-    cout << "evolve_model" << endl;
+    //cout << "evolve_model" << endl;
 
     tsunami4py->evolve_system(time);
 
@@ -162,13 +162,13 @@ int evolve_model(double time) {
 }
 
 int synchronize_model() {
-    cout << "synchronize_model" << endl;
+    //cout << "synchronize_model" << endl;
 
     return 0;
 }
 
 int commit_parameters() {
-    cout << "commit_parameters" << endl;
+    //cout << "commit_parameters" << endl;
     if(are_arrays_allocated)
         tsunami4py->reset_parameters();
 
@@ -176,7 +176,7 @@ int commit_parameters() {
 }
 
 int recommit_parameters() {
-    cout << "recommit_parameters" << endl;
+    //cout << "recommit_parameters" << endl;
     if(are_arrays_allocated)
         tsunami4py->reset_parameters();
 
@@ -184,7 +184,7 @@ int recommit_parameters() {
 }
 
 int set_mass(int index_of_the_particle, double mass) {
-    cout << "set_mass" << endl;
+    //cout << "set_mass" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -196,7 +196,7 @@ int set_mass(int index_of_the_particle, double mass) {
 }
 
 int get_mass(int index_of_the_particle, double * mass) {
-    cout << "get_mass" << endl;
+    //cout << "get_mass" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -208,7 +208,7 @@ int get_mass(int index_of_the_particle, double * mass) {
 }
 
 int set_radius(int index_of_the_particle, double radius) {
-    cout << "set_radius" << endl;
+    //cout << "set_radius" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -220,11 +220,10 @@ int set_radius(int index_of_the_particle, double radius) {
 }
 
 int get_radius(int index_of_the_particle, double * radius){
-    cout << "get_radius" << endl;
+    //cout << "get_radius" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
-
 
     *radius = tsunami4py->rad[ind];
 
@@ -232,7 +231,7 @@ int get_radius(int index_of_the_particle, double * radius){
 }
 
 int set_position(int index_of_the_particle, double x, double y, double z) {
-    cout << "set_position" << endl;
+    //cout << "set_position" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -247,7 +246,7 @@ int set_position(int index_of_the_particle, double x, double y, double z) {
 }
 
 int get_position(int index_of_the_particle, double * x, double * y, double * z) {
-    cout << "get_position" << endl;
+    //cout << "get_position" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -261,7 +260,7 @@ int get_position(int index_of_the_particle, double * x, double * y, double * z) 
 }
 
 int set_velocity(int index_of_the_particle, double vx, double vy, double vz) {
-    cout << "set_velocity" << endl;
+    //cout << "set_velocity" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -276,7 +275,7 @@ int set_velocity(int index_of_the_particle, double vx, double vy, double vz) {
 }
 
 int get_velocity(int index_of_the_particle, double * vx, double * vy, double * vz) {
-    cout << "get_velocity" << endl;
+    //cout << "get_velocity" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -291,7 +290,7 @@ int get_velocity(int index_of_the_particle, double * vx, double * vy, double * v
 
 int set_state(int index_of_the_particle, double mass, double x, double y,
               double z, double vx, double vy, double vz, double radius) {
-    cout << "set_state" << endl;
+    //cout << "set_state" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -314,7 +313,7 @@ int set_state(int index_of_the_particle, double mass, double x, double y,
 int get_state(int index_of_the_particle, double * mass, double * x,
               double * y, double * z, double * vx, double * vy, double * vz,
               double * radius) {
-    cout << "get_state" << endl;
+    //cout << "get_state" << endl;
 
     size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
     if (ind >= tmp_Npart) return -1;
@@ -333,6 +332,59 @@ int get_state(int index_of_the_particle, double * mass, double * x,
     return 0;
 }
 
+int get_adiabatic_index(int index_of_the_particle, double *gamma) {
+    size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
+    if (ind >= tmp_Npart) return -1;
+
+    *gamma = tsunami4py->xdata[ind].polyt;
+
+    return 0;
+}
+
+int set_adiabatic_index(int index_of_the_particle, double gamma) {
+    size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
+    if (ind >= tmp_Npart) return -1;
+
+    tsunami4py->xdata[ind].polyt = gamma;
+
+    return 0;
+}
+
+int get_kaps(int index_of_the_particle, double *kaps) {
+    size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
+    if (ind >= tmp_Npart) return -1;
+
+    *kaps = tsunami4py->xdata[ind].klove2;
+
+    return 0;
+}
+
+int set_kaps(int index_of_the_particle, double kaps) {
+    size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
+    if (ind >= tmp_Npart) return -1;
+
+    tsunami4py->xdata[ind].klove2 = kaps;
+
+    return 0;
+}
+
+int get_timelag(int index_of_the_particle, double *timelag) {
+    size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
+    if (ind >= tmp_Npart) return -1;
+
+    *timelag = tsunami4py->xdata[ind].taulag;
+
+    return 0;
+}
+
+int set_timelag(int index_of_the_particle, double timelag) {
+    size_t ind = find(tmp_idlist.begin(), tmp_idlist.end(), index_of_the_particle) - tmp_idlist.begin();
+    if (ind >= tmp_Npart) return -1;
+
+    tsunami4py->xdata[ind].taulag = timelag;
+
+    return 0;
+}
 
 int set_begin_time(double time) {
     tsunami4py->begin_time = time;

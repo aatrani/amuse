@@ -20,6 +20,9 @@ pythagorean.mass = [3., 4., 5.] | nbody_system.mass
 pythagorean.position = [[1., 3., 0.], [-2., -1., 0.], [1., -1., 0.]] | nbody_system.length
 pythagorean.velocity = [[0., 0., 0.], [0., 0., 0.], [0., 0., 0.]] | nbody_system.length / nbody_system.time
 pythagorean.radius = [0., 0., 0.] | nbody_system.length
+pythagorean.kaps = [0.0, 0.0, 0.0]
+pythagorean.timelag = [0.0, 0.0, 0.0] | units.s
+pythagorean.adiabatic_index = [0.0, 0.0, 0.0]
 
 print(pythagorean)
 code.particles.add_particles(pythagorean)
@@ -56,11 +59,12 @@ while (realt < ft):
     code.evolve_model(realt)
     code_to_pythagorean.copy()
 
-    print(code.get_time(), code.get_deltaE())
+    print(code.get_time(), code.get_deltaE(), end="\r")
 
     totp.append(pythagorean.position.value_in(nbody_system.length))
 
 totp = np.vstack(totp)
+print(code.particles)
 
 fig = plt.figure()
 ax = fig.add_subplot(111)

@@ -13,6 +13,9 @@ from amuse.ic import plummer
 from amuse.ic.plummer import new_plummer_model
 import matplotlib.pyplot as plt
 
+
+conv = nbody_system.nbody_to_si(1 | units.au, 1 | units.MSun)
+
 code = Tsunami(redirection="null")
 
 pythagorean = Particles(3)
@@ -21,7 +24,7 @@ pythagorean.position = [[1., 3., 0.], [-2., -1., 0.], [1., -1., 0.]] | nbody_sys
 pythagorean.velocity = [[0., 0., 0.], [0., 0., 0.], [0., 0., 0.]] | nbody_system.length / nbody_system.time
 pythagorean.radius = [0., 0., 0.] | nbody_system.length
 pythagorean.kaps = [0.0, 0.0, 0.0]
-pythagorean.timelag = [0.0, 0.0, 0.0] | units.s
+pythagorean.timelag = [1.1, 2.2, 3.3] | nbody_system.time
 pythagorean.adiabatic_index = [0.0, 0.0, 0.0]
 
 print(pythagorean)
